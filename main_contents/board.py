@@ -39,18 +39,27 @@ class Board:
                 self.boxes[i][j].val = ele
     def render(self, display, g, hovering, solve):
 
-        pygame.draw.line(display,green, (3* sideLength, 0),(3* sideLength, 9 * sideLength), 5)
-        pygame.draw.line(display, green, (6 * sideLength, 0), (6 * sideLength, 9 * sideLength), 5)
+        pygame.draw.line(display,black, (3* sideLength, 0),(3* sideLength, 9 * sideLength), 5)
+        pygame.draw.line(display, black, (6 * sideLength, 0), (6 * sideLength, 9 * sideLength), 5)
 
-        pygame.draw.line(display, green, (0, 3 * sideLength), (9 * sideLength, 3 * sideLength), 5)
-        pygame.draw.line(display, green, (0,6 * sideLength), (9 * sideLength, 6 * sideLength), 5)
-        pygame.draw.line(display, green, (0, 9 * sideLength), (9 * sideLength, 9 * sideLength), 5)
+        pygame.draw.line(display, black, (0, 3 * sideLength), (9 * sideLength, 3 * sideLength), 5)
+        pygame.draw.line(display, black, (0,6 * sideLength), (9 * sideLength, 6 * sideLength), 5)
+        pygame.draw.line(display, black, (0, 9 * sideLength), (9 * sideLength, 9 * sideLength), 5)
         for row in self.boxes:
             for ele in row:
                 ele.draw(display, g, hovering, solve)
         for x in range(self.lives - self.current):
             pygame.draw.line(display,red,(0 + 5 + x * sideLength, 9 * sideLength + 5),(sideLength - 5 + x * sideLength, 9 * sideLength + sideLength - 5), 3)
             pygame.draw.line(display, red, (0 + 5 + x * sideLength, 9 * sideLength + sideLength - 5),(sideLength - 5 + x * sideLength, 9 * sideLength + 5), 3)
+
+        text = fontdir.render('left click to select', True, black)
+        text2 = fontdir.render('right click to confirm', True, black)
+        text3 = fontdir.render('space to solve', True, black)
+        text4 = fontdir.render('ESC to exit', True, black)
+        display.blit(text, (text.get_size()[0] + 300,text.get_size()[1] - sideLength / 2 + 20))
+        display.blit(text2, (text.get_size()[0] + 295, text.get_size()[1] - sideLength / 2 + 40))
+        display.blit(text3, (text.get_size()[0] + 300, text.get_size()[1] - sideLength / 2 + 60))
+        display.blit(text4, (text.get_size()[0] + 300, text.get_size()[1] - sideLength / 2 + 80))
 class box:
 
     def __init__(self, row, col, val, permanent) -> None:
@@ -73,14 +82,14 @@ class box:
     def draw(self, display, g, hovering, solve):
         if solve:
             if not self.hover:
-                pygame.draw.rect(display,green,self.rect, 1)
+                pygame.draw.rect(display,black,self.rect, 1)
             else:
                 pygame.draw.rect(display, blue, self.rect, 3)
         else:
 
             if hovering:
                 if not self.hover:
-                    pygame.draw.rect(display,green,self.rect, 1)
+                    pygame.draw.rect(display,black,self.rect, 1)
                 else:
                     if g:
                         pygame.draw.rect(display, greengr, self.rect, 3)
@@ -88,7 +97,7 @@ class box:
                         pygame.draw.rect(display, red, self.rect, 3)
                     if self.val == 0:
                         pygame.draw.rect(display, red, self.rect, 3)
-        text = font.render(str(self.val), True, green)
+        text = font.render(str(self.val), True, black)
         textHold = font.render(str(self.holdNum), True, grey)
         if self.val != 0:
             display.blit(text,(self.rect.x + text.get_size()[0], self.rect.y + text.get_size()[1] - sideLength/2))

@@ -3,12 +3,12 @@ pygame.init()
 red = (255,0,0)
 sideLength = 50
 white = (255,255,255)
-green = (0,0,0)
+black = (0,0,0)
 blue = (0,0,255)
 font = pygame.font.Font('freesansbold.ttf', 32)
 grey = (128, 128, 128)
 greengr = (0,255,0)
-
+fontdir = pygame.font.Font('freesansbold.ttf', 18)
 
 delay = 50
 board = [
